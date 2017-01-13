@@ -1,30 +1,34 @@
-function root(arr, i) {
-  if (arr[i] === i) {
-    return i;
-  }
-  arr[i] = root(arr, arr[i]); //TOTEST
-  return arr[i];
-}
-var sizes = [];
-module.exports = {
-  initCallback(intN) {
-    for (var i = 0; i < intN; i++) {
-      sizes.push(0);
-    }
-  },
-  isConnected(arr, a, b) {
-    return root(arr, a) === root(arr, b);
-  },
+var base = require('./quick-find').DynamicConnectivity,
+  root = require('./quick-union').root;
 
-  connectItems(arr, a, b) {
-    var i = root(arr, a),
-      j = root(arr, b);
-    if (i === j) return;
-    if (sizes[i] > sizes[j]) {
-      arr[j] = j; sizes[i] += sz[j];
-    } else {
-      arr[i] = j; sizes[j] += sz[i];
-    }
-    return arr.map(x => x);
-  }
+function weight(arr, a, b) {
+  arr[a] = arr[a] + arr[b];
+  arr.slice();
 };
+
+const QuickUnionWeighted = Object.create(base);
+
+QuickUnionWeighted.init = function (intN) {
+  this.populize(intN);
+  this.sizes = this.ids.map(x => 1);
+};
+
+QuickUnionWeighted.isConnected = function (a, b) {
+  return root(this.ids, a) === root(this.ids, b);
+};
+
+QuickUnionWeighted.connectItems = function (a, b) {
+  var i = root(this.ids, a),
+    j = root(this.ids, b);
+  if (i === j) return;
+  if (this.sizes[i] > this.sizes[j]) {
+    this.ids[j] = i;
+    weight(this.sizes, i, j);
+  } else {
+    this.ids[i] = j;
+    weight(this.sizes, j, i);
+  }
+  this.ids = this.ids.slice();
+};
+
+module.exports = QuickUnionWeighted;
