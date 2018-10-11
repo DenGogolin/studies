@@ -5,7 +5,8 @@
     "main": "src/index.js",
     "scripts": {
         "test": "mocha ./src/**/*.spec.js -R spec",
-        "dev": "nodemon --exec babel-node src/index.js"
+		"dev": "nodemon --exec babel-node src/index.js",
+		"start": "npm run test"
     },
     "engines": {
         "node": ">=8.0.0",

@@ -1,5 +1,6 @@
 const base = 10;
 module.exports = function sum(str1, str2) {
+    if (str1 === `0` && str2 === `0`) return `0`;
 	const result = [],
 		arr1 = str1.split("").reverse(),
 		arr2 = str2.split("").reverse();
