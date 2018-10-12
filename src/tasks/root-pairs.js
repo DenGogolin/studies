@@ -7,15 +7,14 @@ Write a function that takes a word and a list of words and  returns the array of
 module.exports = function getPairTo(wl, word) {
 	const hash = {};
 	const r = [];
-	let letters = word.split("");
-	for (let i = 1; i < letters.length - 1; i++) {
-		const spl = letters.splice(0, 1);
-		letters = letters.concat(spl);
-		hash[letters.join("")] = true;
-	}
+	for (let i = 1; i < word.length - 1; i++) {
+		word = `${word.substr(1)}${word.substr(0,1)}`;
+		hash[word] = true;
+    }
 
 	for (let w of wl) {
 		if (hash[w]) {
+            hash[w] = false;
             r.push(w);
 		}
 	}

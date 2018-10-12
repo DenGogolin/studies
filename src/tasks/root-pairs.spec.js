@@ -3,7 +3,7 @@ const getPairTo = require("./root-pairs"),
 
 describe("Tasks", () => {
 	it("Root pairs", () => {
-		const wordLists = [`tokyo`, `kyoto`, `yotok`, `oytko`, `kieto`, `koyto`];
+		const wordLists = [`tokyo`, `kyoto`, `kyoto`, `yotok`, `oytko`, `kieto`, `koyto`];
 		const word = `tokyo`;
 		const results = [`kyoto`, `yotok`];
 		expect(getPairTo(wordLists, word)).to.deep.equal(results);
