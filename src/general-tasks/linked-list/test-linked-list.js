@@ -5,7 +5,7 @@ module.exports = {
 		LinkedList.from(arr)
 			.removeDuplicates()
 			.toArray(),
-	findKFromEnd: (arr, k) => LinkedList.from(arr).fromEndSindgle(k).value,
+	findKFromEnd: (arr, k) => LinkedList.from(arr).fromEndSingle(k).value,
 	deleteMiddle: (arr, value) =>
 		LinkedList.from(arr)
 			.deleteMiddleSingle(value)

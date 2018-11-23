@@ -123,7 +123,7 @@ module.exports = class LinkedList {
 		return this;
 	}
 
-	fromEndSindgle(k) {
+	fromEndSingle(k) {
 		let i = 0;
 		for (let x of this) {
 			if (i === this.length - k) {

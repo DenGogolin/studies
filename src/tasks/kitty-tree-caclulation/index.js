@@ -68,8 +68,9 @@ const getSets = (tree, input) => {
 		return result && result % mod;
 	};
 	const result = [];
-	for (let i = 0; i < input.length; i++)
+	for (let i = 0; i < input.length; i++) {
 		if (i % 2) result.push(calculateObvOpt(input[i]));
+	}
 	return result;
 };
 

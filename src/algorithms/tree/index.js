@@ -3,57 +3,52 @@ class Tree {
 		this.head = head;
 	}
 
-	findByValue(value) {
-		const visited = {};
-		const queue = [this.head];
+	get listsOfDepth() {
+		const result = [];
+		let queue = [this.head];
 
-		visited[this.head.value] = true;
 		while (queue.length) {
-			const item = queue.pop();
-			if(item.value === value) {
-				return item;
+			const item = queue.shift();
+			if (result[item.depth]) {
+				result[item.depth].push(item.val);
+			} else {
+				result[item.depth] = [item.val];
 			}
-			for (let i of item.nodes) {
-				if (!visited[i]) {
-					visited[i] = true;
-					queue.unshift(i);
-				}
+			if (item.nodes.length) {
+				queue = queue.concat(item.nodes.filter(x => Boolean(x)));
 			}
 		}
+		return result;
 	}
-
-
 }
 
 class TreeNode {
-	constructor(value, parent) {
+	constructor(val, root, distance = 1) {
 		this._nodes = [];
-		this.value = value;
-		this._depth = 0;
-		this.parent = parent;
+		this.val = val;
+		this.root = root;
+		this.dist = distance;
 	}
-	pushNode(node) {
+	set nodes(node) {
 		this._nodes.push(node);
-	}
-
-	set nodes(value) {
-		this._nodes = value;
 	}
 
 	get nodes() {
 		return this._nodes;
 	}
 
-	set depth(value) {
-		this._depth = value;
+	get depth() {
+		return (this.root && this.root.depth + 1) || 0;
 	}
 
-	get depth() {
-		return this._depth;
+	get listsOfDepth() {
+		const result = [];
+
+		return result;
 	}
 }
 
 module.exports = {
-	Tree, 
+	Tree,
 	TreeNode
 };
